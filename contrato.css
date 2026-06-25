@@ -29,6 +29,7 @@
     color: var(--ink);
     background: var(--surface);
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
   /* ── TOOLBAR ── */
@@ -618,6 +619,115 @@
   }
   .footer-brand { font-weight: 700; font-size: 9pt; color: var(--ink); }
   .footer-info { font-size: 8pt; color: var(--muted); text-align: right; }
+
+  /* ── RESPONSIVIDADE MOBILE ── */
+  @media (max-width: 767px) {
+
+    .toolbar {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 16px;
+    }
+
+    .toolbar-brand { font-size: 0.82rem; }
+
+    .btn-export {
+      font-size: 0.78rem;
+      padding: 8px 14px;
+    }
+
+    .fill-banner {
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+
+    .fill-progress {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .page {
+      padding: 24px 18px;
+    }
+
+    .editable {
+      min-width: 80px;
+      max-width: 100%;
+    }
+
+    /* Partes em coluna única */
+    .partes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Entregas em coluna única */
+    .entregas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Cláusulas em coluna única */
+    .clausulas {
+      grid-template-columns: 1fr;
+    }
+
+    /* Assinaturas em coluna única */
+    .assinaturas {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Tabela de planos vira cards */
+    .planos-table,
+    .planos-table thead,
+    .planos-table tbody,
+    .planos-table th,
+    .planos-table td,
+    .planos-table tr {
+      display: block;
+    }
+
+    .planos-table thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    .planos-table td {
+      border: none;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      padding: 8px 10px 8px 44%;
+      word-break: break-word;
+    }
+
+    .planos-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      width: 40%;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .planos-table tr {
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .sig-area { min-height: 80px; }
+
+    /* Modal de assinatura ocupa quase a tela toda */
+    .sig-modal {
+      width: 95vw;
+      padding: 16px;
+    }
+  }
 
   /* ── IMPRESSÃO ── */
   @media print {
