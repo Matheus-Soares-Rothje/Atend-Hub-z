@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrato de Prestação de Serviços — AtendêHub'z</title>
+<link rel="icon" type="image/png" href="assets/logo2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="contrato.css">
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <a href="index.html#planos" class="btn-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Voltar ao site
+  </a>
+  <div class="toolbar-brand">Atend<span>ê</span>Hub'z — Contrato</div>
+  <div class="toolbar-actions">
+    <button class="btn-export" id="btn-export" onclick="exportarPDF()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Exportar / Salvar como PDF
+    </button>
+  </div>
+</div>
+
+<!-- BANNER PROGRESSO -->
+<div class="fill-banner">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <span><strong>Preencha o contrato</strong> antes de exportar — campos em azul são editáveis.</span>
+  <div class="fill-progress">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <span id="progress-label">0 / 6</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <div class="brand-name">Atend<span>ê</span>Hub'z</div>
+      <div class="brand-sub">Automação de Atendimento para Negócios Locais · Praia Grande, SP</div>
+    </div>
+    <div class="doc-info">
+      <div class="doc-title">Contrato de Prestação de Serviços</div>
+      <div class="doc-date" id="data-atual">Praia Grande, SP</div>
+    </div>
+  </div>
+
+  <!-- PARTES -->
+  <div class="section">
+    <div class="section-title">1. Partes</div>
+    <div class="partes-grid">
+      <div class="parte-box">
+        <div class="parte-header">Contratado</div>
+        <div class="parte-body">
+          <p><strong>Matheus Soares Rothje</strong></p>
+          <p>AtendêHub'z</p>
+          <p>WhatsApp: (13) 97811-5599</p>
+          <p>justmattzzzofc@gmail.com</p>
+          <p>Praia Grande, SP — Brasil</p>
+        </div>
+      </div>
+      <div class="parte-box contratante">
+        <div class="parte-header">Contratante</div>
+        <div class="parte-body">
+          <div class="field-row">
+            <label class="field-label" for="f-razao">Razão Social / Nome da Empresa</label>
+            <input class="field-input" id="f-razao" type="text" placeholder="Ex: Barbearia do João Ltda." maxlength="80" data-key="razao">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="f-resp">Responsável (nome completo)</label>
+            <input class="field-input" id="f-resp" type="text" placeholder="Ex: João da Silva Santos" maxlength="60" data-key="responsavel">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="f-tel">Telefone / WhatsApp</label>
+            <input class="field-input" id="f-tel" type="tel" placeholder="Ex: (13) 99999-9999" maxlength="20" data-key="telefone">
+            <span class="field-error" id="err-tel">Informe um telefone válido, ex: (13) 99999-9999</span>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="f-email">E-mail</label>
+            <input class="field-input" id="f-email" type="email" placeholder="Ex: joao@barbearia.com.br" maxlength="80" data-key="email">
+            <span class="field-error" id="err-email">Informe um e-mail válido, ex: joao@empresa.com.br</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANO -->
+  <div class="section">
+    <div class="section-title">2. Plano Contratado</div>
+    <table class="planos-table">
+      <thead>
+        <tr>
+          <th style="width:50%">Plano</th>
+          <th style="width:25%">Setup (único)</th>
+          <th style="width:25%">Mensalidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="plano-row" data-plano="Starter" data-setup="R$ 600,00" data-mensalidade="Sem mensalidade" onclick="selecionarPlano(this)">
+          <td>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span class="plano-destaque">Starter</span>
+            <span class="plano-desc">Automação WhatsApp + confirmações + painel + treinamento + suporte 30 dias</span>
+          </td>
+          <td class="valor">R$ 600,00</td>
+          <td style="color:var(--muted);">Sem mensalidade</td>
+        </tr>
+        <tr class="plano-row" data-plano="Professional" data-setup="R$ 1.200,00" data-mensalidade="R$ 200,00/mês" onclick="selecionarPlano(this)">
+          <td>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span class="plano-destaque">Professional <span class="badge">+ POPULAR</span></span>
+            <span class="plano-desc">Starter + Site profissional + Google Maps + SEO local + suporte contínuo</span>
+          </td>
+          <td class="valor">R$ 1.200,00</td>
+          <td class="valor">R$ 200,00/mês</td>
+        </tr>
+        <tr class="plano-row" data-plano="Business" data-setup="R$ 2.000,00" data-mensalidade="R$ 300,00/mês" onclick="selecionarPlano(this)">
+          <td>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span class="plano-destaque">Business</span>
+            <span class="plano-desc">Professional + Google Ads + captação ativa + reativação de clientes + suporte 7 dias</span>
+          </td>
+          <td class="valor">R$ 2.000,00</td>
+          <td class="valor">R$ 300,00/mês</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="plano-hint" id="plano-hint-select">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Clique em um plano para selecioná-lo
+    </div>
+    <div class="plano-hint hidden selected-msg" id="plano-hint-ok">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Plano <strong id="plano-nome-hint"></strong> selecionado
+    </div>
+    <div class="plano-resumo" id="plano-resumo">
+      <div class="plano-resumo-title">Plano selecionado</div>
+      <div class="plano-resumo-val" id="resumo-val"></div>
+      <div class="plano-resumo-sub" id="resumo-sub"></div>
+    </div>
+    <div class="validation-tip" id="val-plano">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Selecione um plano antes de exportar.
+    </div>
+  </div>
+
+  <!-- ENTREGAS -->
+  <div class="section">
+    <div class="section-title">3. O que será entregue</div>
+    <div class="entregas-grid">
+      <div class="entrega-item" data-planos="Starter,Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>WhatsApp Business configurado com mensagens automáticas de confirmação e lembrete
+      </div>
+      <div class="entrega-item" data-planos="Starter,Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Painel de acompanhamento em tempo real (confirmados, pendentes, cancelados)
+      </div>
+      <div class="entrega-item" data-planos="Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Site profissional com agendamento online e integração Google Maps
+      </div>
+      <div class="entrega-item" data-planos="Starter,Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Treinamento de 30 minutos com a equipe do Contratante após a entrega
+      </div>
+      <div class="entrega-item" data-planos="Starter,Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Implementação em até 48 horas úteis após confirmação do pagamento
+      </div>
+      <div class="entrega-item" data-planos="Professional,Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Suporte técnico contínuo (manutenção mensal e atualização de conteúdo)
+      </div>
+      <div class="entrega-item" data-planos="Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Google Ads gerenciado + captação ativa de novos clientes
+      </div>
+      <div class="entrega-item" data-planos="Business">
+        <span class="entrega-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Campanha de reativação de clientes inativos via WhatsApp
+      </div>
+    </div>
+  </div>
+
+  <!-- CLÁUSULAS -->
+  <div class="section">
+    <div class="section-title">4. Condições Gerais</div>
+    <div class="clausulas">
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Pagamento
+        </div>
+        <p>O valor do setup é pago <strong>antecipadamente via PIX</strong> antes do início da implementação. A mensalidade é cobrada todo mês na mesma data, a partir do segundo mês.</p>
+      </div>
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          Cancelamento
+        </div>
+        <p>A mensalidade pode ser cancelada a qualquer momento, <strong>sem multa</strong>, com aviso prévio de 7 dias. O setup não é reembolsável após o início da implementação.</p>
+      </div>
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Prazo de Entrega
+        </div>
+        <p>O sistema será implementado em até <strong>48 horas úteis</strong> após a confirmação do pagamento do setup e fornecimento dos acessos necessários.</p>
+      </div>
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Obrigações do Contratante
+        </div>
+        <p>Fornecer acesso ao WhatsApp Business para configuração, participar do treinamento e manter os dados de acesso em sigilo.</p>
+      </div>
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Inadimplência
+        </div>
+        <p>Em caso de atraso superior a <strong>15 dias</strong> no pagamento da mensalidade, os serviços poderão ser suspensos até a regularização do débito, sem prejuízo de eventuais cobranças.</p>
+      </div>
+      <div class="clausula">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Plataformas Externas
+        </div>
+        <p>O Contratado não se responsabiliza por alterações, restrições ou interrupções em plataformas de terceiros (WhatsApp, Google Maps, Google Ads etc.) que estejam fora de seu controle e possam impactar as funcionalidades contratadas.</p>
+      </div>
+      <div class="clausula" style="grid-column: 1 / -1;">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Validade do Aceite Eletrônico
+        </div>
+        <p>A assinatura digital aposta neste contrato possui <strong>plena validade jurídica</strong>, conforme a Medida Provisória 2.200-2/2001 e a Lei 14.063/2020, sendo reconhecida como instrumento hábil para formalização do presente acordo.</p>
+      </div>
+      <div class="clausula" style="grid-column: 1 / -1;">
+        <div class="clausula-titulo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 21h14M5 7l-3 6h6l-3-6zM19 7l-3 6h6l-3-6zM5 7h14"/></svg>
+          Foro Jurídico
+        </div>
+        <p>Fica eleito o <strong>foro da Comarca de Praia Grande/SP</strong> para dirimir eventuais controvérsias oriundas do presente contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIX -->
+  <div class="section">
+    <div class="section-title">5. Chave PIX para Pagamento</div>
+    <div class="pix-box">
+      <div>
+        <div class="pix-label">Chave PIX (Telefone)</div>
+        <div class="pix-key">(13) 97811-5599</div>
+        <div class="pix-desc">Matheus Soares Rothje · AtendêHub'z · Mercado Pago</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSINATURAS -->
+  <div class="section">
+    <div class="section-title">6. Assinaturas</div>
+    <div class="assinaturas">
+
+      <!-- CONTRATADO (fixo) -->
+      <div class="assinatura-box static-side">
+        <div class="sig-static-line"></div>
+        <div class="assinatura-nome">Matheus Soares Rothje</div>
+        <div class="assinatura-cargo">CONTRATADO — AtendêHub'z</div>
+        <div class="assinatura-contato">(13) 97811-5599</div>
+      </div>
+
+      <!-- CONTRATANTE (pad melhorado) -->
+      <div class="assinatura-box">
+        <div class="sig-area" id="sig-area">
+          <canvas class="sig-canvas" id="sig-canvas"></canvas>
+          <div class="sig-placeholder" id="sig-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+            Clique e arraste para assinar<br>
+            <span style="font-size:7.5pt">ou use o botão "Ampliar"</span>
+          </div>
+        </div>
+
+        <div class="sig-footer">
+          <div class="sig-status-text" id="sig-status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Aguardando assinatura
+          </div>
+          <div class="sig-btn-group">
+            <button class="btn-sig-clear" id="btn-sig-clear" onclick="clearSmall()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Limpar
+            </button>
+            <button class="btn-sig-expand" onclick="abrirModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              Ampliar para assinar
+            </button>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="f-sig-nome">Nome completo do Contratante</label>
+          <input class="field-input" id="f-sig-nome" type="text" placeholder="Ex: João da Silva Santos" maxlength="60" data-key="sig_nome">
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="f-data">Data de assinatura</label>
+          <input class="field-input date-field" id="f-data" type="date" data-key="data_assinatura">
+        </div>
+        <div class="validation-tip" id="val-sig">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Adicione a assinatura e a data antes de exportar.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-brand">AtendêHub'z</div>
+    <div class="footer-info">
+      Praia Grande, SP · (13) 97811-5599 · justmattzzzofc@gmail.com<br>
+      <a href="https://matheus-soares-rothje.github.io/Atend-Hub-z" target="_blank" style="color:var(--blue);text-decoration:none;">matheus-soares-rothje.github.io/Atend-Hub-z</a>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- MODAL DE ASSINATURA AMPLIADA -->
+<div class="sig-modal-overlay" id="sig-modal-overlay">
+  <div class="sig-modal">
+    <div class="sig-modal-header">
+      <div class="sig-modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        Assinatura digital — área ampliada
+      </div>
+      <button class="btn-modal-close" onclick="fecharModal()" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="sig-modal-canvas-wrap" id="sig-modal-wrap">
+      <canvas class="sig-modal-canvas" id="sig-modal-canvas"></canvas>
+      <div class="sig-modal-placeholder" id="sig-modal-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        Assine com o mouse ou dedo<br>
+        <span style="font-size:8pt">Use o espaço inteiro para uma assinatura legível</span>
+      </div>
+    </div>
+
+    <div class="sig-modal-tip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+      Quanto maior e mais clara a assinatura, melhor aparece no documento exportado.
+    </div>
+
+    <div class="sig-modal-footer">
+      <button class="btn-modal-refazer" onclick="clearModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        Limpar e refazer
+      </button>
+      <button class="btn-modal-confirmar" id="btn-modal-confirmar" onclick="confirmarSig()" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Confirmar assinatura
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="contrato.js"></script>
+
+</body>
+</html>
