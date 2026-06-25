@@ -84,57 +84,193 @@
   .step-content p{font-size:0.86rem;line-height:1.7}
 
   /* DASHBOARD MOCKUP */
-  div[style*="grid-template-columns:200px 1fr"]{
-    grid-template-columns:1fr !important;
-    min-height:auto !important;
-  }
   .dash-body-grid{
     grid-template-columns:1fr;
     min-height:auto;
   }
+  /* URL da barra — trunca em telas pequenas */
   .dash-chrome-url{
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-    max-width:150px;display:inline-block;font-size:0.66rem !important;
+    max-width:140px;
+    font-size:0.65rem !important;
   }
+  /* Sidebar vira barra horizontal com scroll */
   .dash-sidebar{
-    padding:16px 0;
+    padding:12px 0;
     display:flex;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;           /* oculta scrollbar no Firefox */
   }
-  .dash-sidebar > div:first-child{
-    border-bottom:none !important;margin-bottom:0 !important;
-    padding:0 18px !important;display:flex;align-items:center;flex-shrink:0;
+  .dash-sidebar::-webkit-scrollbar{ display:none }
+  .dash-logo-wrap{
+    border-bottom:none !important;
+    margin-bottom:0 !important;
+    padding:0 16px !important;
+    display:flex;align-items:center;
+    flex-shrink:0;
   }
-  .dash-sidebar > div:last-child{
-    display:flex !important;flex-direction:row !important;
-    gap:8px !important;padding:0 14px !important;
+  .dash-nav-list{
+    flex-direction:row !important;
+    gap:4px !important;
+    padding:0 10px !important;
   }
-  .dash-sidebar > div:last-child > div{white-space:nowrap;flex-shrink:0;padding:8px 12px !important}
-  .dash-main{padding:18px}
-  .dash-header-row{flex-wrap:wrap}
-  .dash-header-titles{min-width:0}
-  .dash-header-title{font-size:0.95rem}
+  .dash-nav-item{
+    flex-shrink:0;
+    padding:7px 12px !important;
+  }
+  .dash-nav-label{ white-space:nowrap }
+
+  /* Área principal */
+  .dash-main{ padding:16px;overflow:hidden }
+  .dash-header-title{ font-size:0.95rem }
   .dash-header-sub{
-    font-size:0.7rem;white-space:normal;line-height:1.5;
+    font-size:0.68rem;
+    white-space:normal;
+    line-height:1.45;
+    word-break:break-word;
   }
-  .dash-new-btn{font-size:0.72rem !important;padding:7px 12px !important}
-  .dash-kpi-grid{grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-  .dash-kpi{padding:14px}
-  .dash-kpi-label{font-size:0.64rem}
-  .dash-kpi-val{font-size:1.3rem}
-  .dash-agenda-head{padding:14px 16px}
+  .dash-new-btn{
+    font-size:0.7rem !important;
+    padding:5px 10px !important;
+  }
+
+  /* KPI: 1 coluna em celular pequeno */
+  .dash-kpi-grid{
+    grid-template-columns:1fr;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .dash-kpi{ padding:12px }
+  .dash-kpi-label{ font-size:0.62rem }
+  .dash-kpi-val{ font-size:1.25rem }
+  .dash-kpi-sub{ font-size:0.64rem }
+
+  /* Linha de agenda: badge desce para nova linha em telas muito pequenas */
+  .dash-agenda-head{ padding:12px 14px }
   .dash-row{
-    padding:14px 16px;gap:4px 12px;
+    padding:12px 14px;
     display:grid;
     grid-template-columns:auto 8px 1fr;
+    grid-template-rows:auto auto;
     align-items:center;
+    gap:4px 10px;
   }
-  .dash-row > div:last-child{
+  .dash-time{ width:auto;font-size:0.66rem;grid-row:1 }
+  .dash-dot{ grid-row:1 }
+  .dash-row-info{ grid-row:1;min-width:0 }
+  /* Badge ocupa linha inteira abaixo do nome */
+  .dash-status{
     grid-column:1 / -1;
-    margin-top:6px;margin-left:20px;
+    grid-row:2;
+    justify-self:start;
+    margin-top:4px;
+    margin-left:18px;   /* alinha visualmente com o nome */
+    font-size:0.62rem;
+    padding:2px 8px;
   }
-  .dash-time{width:auto;font-size:0.7rem}
+
+  /* ── A PARTIR DE ~481px ── */
+  @media (min-width:481px){
+    /* KPI: 2 colunas em telefones maiores */
+    .dash-kpi-grid{ grid-template-columns:repeat(2,1fr) }
+
+    /* Badge volta para a mesma linha */
+    .dash-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dash-status{
+      grid-column:auto;grid-row:auto;
+      justify-self:auto;
+      margin-top:0;margin-left:0;
+      font-size:0.65rem;
+      padding:3px 8px;
+    }
+    /* ... restante do bloco 481px já existente ... */
+    .hero-actions{flex-direction:row;align-items:center}
+    .hero-actions a{width:auto}
+    .proof-inner{flex-direction:row}
+    .proof-item{
+      flex:1 1 45%;border-right:none;
+      border-bottom:1px solid var(--border);
+    }
+    .cta-section .hero-actions{flex-direction:row;align-items:center}
+  }
+
+  /* ── TABLETS (a partir de ~768px) ── */
+  @media (min-width:768px){
+    .container,.container-sm,.container-xs{padding:0 32px}
+    .nav-inner{padding:0 32px}
+    .nav-cta-full{display:inline}
+    .nav-cta-short{display:none}
+    .nav-cta{padding:7px 16px;font-size:0.82rem !important}
+
+    /* Dashboard — sidebar vertical volta */
+    .dash-chrome-url{ max-width:none;font-size:0.72rem !important }
+    .dash-body-grid{
+      grid-template-columns:180px 1fr;
+      min-height:480px;
+    }
+    .dash-sidebar{
+      display:block;
+      overflow-x:visible;
+      padding:20px 0;
+    }
+    .dash-logo-wrap{
+      padding:0 14px 16px !important;
+      border-bottom:1px solid #334155 !important;
+      margin-bottom:14px !important;
+    }
+    .dash-nav-list{
+      flex-direction:column !important;
+      gap:2px !important;
+      padding:0 8px !important;
+    }
+    .dash-nav-item{ padding:8px 10px !important }
+    .dash-main{ padding:20px;overflow:hidden }
+    /* KPI: 2 colunas no tablet */
+    .dash-kpi-grid{ grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px }
+    .dash-kpi{ padding:14px }
+    .dash-kpi-label{ font-size:0.68rem }
+    .dash-kpi-val{ font-size:1.5rem }
+    /* Linhas de agenda ficam inline no tablet */
+    .dash-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 16px;
+    }
+    .dash-time{ width:40px;font-size:0.7rem }
+    .dash-status{
+      grid-column:auto;grid-row:auto;
+      justify-self:auto;
+      margin-top:0;margin-left:0;
+      font-size:0.68rem;
+      padding:3px 8px;
+    }
+    /* restante do bloco 768px já existente */
+    .dash-header-row{flex-wrap:wrap;gap:8px}
+    .hero{padding:128px 32px 80px}
+    .section{padding:84px 32px}
+    .proof-strip{padding:44px 32px}
+    .proof-inner{flex-direction:row}
+    .proof-item{border-right:1px solid var(--border);border-bottom:none}
+    .proof-item:last-child{border-right:none}
+    .problema-grid{grid-template-columns:1fr 1fr;gap:48px}
+    .impact-card{position:sticky;top:80px}
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .cases-grid{grid-template-columns:repeat(2,1fr)}
+    .planos-grid{grid-template-columns:1fr}
+    footer > div > div:first-child{grid-template-columns:1.6fr 1fr 1fr !important}
+    footer > div > div:last-child{flex-direction:row !important;align-items:center !important}
+    #sobre .container-sm > div{
+      grid-template-columns:auto 1fr !important;text-align:left;
+    }
+    #sobre .container-sm > div > div:first-child{display:block}
+    #sobre .container-sm > div > div:last-child > div:last-child{justify-content:flex-start;flex-direction:row;width:auto}
+    .founder-link{width:auto;padding:8px 16px}
+  }
 
   /* CASES */
   .cases-header{margin-bottom:40px}
