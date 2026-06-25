@@ -191,7 +191,6 @@
       flex:1 1 45%;border-right:none;
       border-bottom:1px solid var(--border);
     }
-    .dash-kpi-grid{grid-template-columns:repeat(4,1fr)}
     .cta-section .hero-actions{flex-direction:row;align-items:center}
   }
 
@@ -204,6 +203,7 @@
     .nav-cta{padding:7px 16px;font-size:0.82rem !important}
     .dash-chrome-url{max-width:none;font-size:0.72rem !important}
     .dash-header-row{flex-wrap:nowrap}
+    .dash-kpi-grid{grid-template-columns:repeat(4,1fr)}
     .hero{padding:128px 32px 80px}
     .section{padding:84px 32px}
     .proof-strip{padding:44px 32px}
